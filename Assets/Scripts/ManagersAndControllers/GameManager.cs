@@ -42,6 +42,7 @@ namespace ManagersAndControllers
                 {
                     // Found a mismatch, stop execution
                     Debug.Log($"Mismatch found at index {i}. Pattern does not match.");
+                    UiManager.Instance.LevelFailed();
                     return; // Exit the method
                 }
             }
