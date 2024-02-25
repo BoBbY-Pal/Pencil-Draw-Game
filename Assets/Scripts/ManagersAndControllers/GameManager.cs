@@ -104,18 +104,25 @@ namespace ManagersAndControllers
 
         public void LoadLevel()
         {
-            foreach (var loopingSlot in loopingSlots)
+            if (GameData.currentGameMode == GameMode.LOOPING)
             {
-                if (loopingSlot != null )
+                foreach (var loopingSlot in loopingSlots)
                 {
-                    Destroy(loopingSlot.gameObject);
+                    if (loopingSlot != null)
+                    {
+                        Destroy(loopingSlot.gameObject);
+                    }
                 }
             }
-            foreach (var directionSlot in directionSlots)
+
+            if (GameData.currentGameMode == GameMode.SEQUENCE)
             {
-                if (directionSlot.draggable != null )
+                foreach (var directionSlot in directionSlots)
                 {
-                    Destroy(directionSlot.draggable.gameObject);
+                    if (directionSlot.draggable != null )
+                    {
+                        Destroy(directionSlot.draggable.gameObject);
+                    }
                 }
             }
             loopingSlots.Clear();
