@@ -6,7 +6,8 @@ using UnityEngine;
     [CreateAssetMenu(fileName = "LevelSettings", menuName = "ScriptableObject/LevelSettings")]
     public class LevelSettings : ScriptableObject
     {
-        public List<Level> Levels = new List<Level>();
+        public List<Level> loopingLevels = new List<Level>();
+        public List<Level> sequenceLevels = new List<Level>();
     }
 
     [Serializable]
@@ -15,7 +16,6 @@ using UnityEngine;
         public int gridWidth;
         public int gridHeight;
         
-        public float nodeSize = 50;
         public float nodeSpacing = 50;
         
         public GameObject dotPrefab;

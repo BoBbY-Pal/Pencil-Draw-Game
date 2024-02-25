@@ -26,7 +26,23 @@ namespace ManagersAndControllers
         public void Awake()
         {
             levelSettings = (LevelSettings) Resources.Load("LevelSettings");
-            currentLevel = levelSettings.Levels[currentLevelIndex-1];
+            Debug.Log("gamemode: " + GameData.currentGameMode);
+            if (GameData.currentGameMode == GameMode.LOOPING)
+            {
+                if (PlayerPrefs.HasKey("LOOPINGCURRENTLEVEL"))
+                {
+                    currentLevelIndex = PlayerPrefs.GetInt("LOOPINGCURRENTLEVEL", currentLevelIndex);
+                }
+                currentLevel = levelSettings.loopingLevels[currentLevelIndex-1];
+            }
+            else if (GameData.currentGameMode == GameMode.SEQUENCE)
+            {
+                if (PlayerPrefs.HasKey("SEQUENCECURRENTLEVEL"))
+                {
+                    currentLevelIndex = PlayerPrefs.GetInt("SEQUENCECURRENTLEVEL", currentLevelIndex);
+                }
+                currentLevel = levelSettings.sequenceLevels[currentLevelIndex-1];
+            }
         }
 
         public void DrawPattern()
