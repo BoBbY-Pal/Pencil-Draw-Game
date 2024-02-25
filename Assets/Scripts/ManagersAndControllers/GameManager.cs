@@ -12,7 +12,7 @@ namespace ManagersAndControllers
 {
     public class GameManager : Singleton<GameManager>
     {
-        private int currentLevelIndex = 2;
+        public int currentLevelIndex = 1;
         [NonSerialized] public Level currentLevel;
         private LevelSettings levelSettings;
         

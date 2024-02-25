@@ -15,36 +15,8 @@ MonoBehaviour:
   Levels:
   - gridWidth: 4
     gridHeight: 4
-    nodeSize: 5
+    nodeSize: 0
     nodeSpacing: 1.5
     dotPrefab: {fileID: 6697996988861725066, guid: ac7e39d3b98c92843bea71040e560b16, type: 3}
     firstNodeIndex: {x: 0, y: 2}
-    patternPath: 020000000400000001000000040000000200000004000000
-  - gridWidth: 4
-    gridHeight: 4
-    nodeSize: 5
-    nodeSpacing: 1.5
-    dotPrefab: {fileID: 6697996988861725066, guid: ac7e39d3b98c92843bea71040e560b16, type: 3}
-    firstNodeIndex: {x: 0, y: 1}
-    patternPath: 0400000004000000040000000100000001000000
-  - gridWidth: 0
-    gridHeight: 0
-    nodeSize: 0
-    nodeSpacing: 0
-    dotPrefab: {fileID: 0}
-    firstNodeIndex: {x: 0, y: 0}
-    patternPath: 
-  - gridWidth: 0
-    gridHeight: 0
-    nodeSize: 0
-    nodeSpacing: 0
-    dotPrefab: {fileID: 0}
-    firstNodeIndex: {x: 0, y: 0}
-    patternPath: 
-  - gridWidth: 0
-    gridHeight: 0
-    nodeSize: 0
-    nodeSpacing: 0
-    dotPrefab: {fileID: 0}
-    firstNodeIndex: {x: 0, y: 0}
-    patternPath: 
+    patternPath: 04000000040000000100000003000000

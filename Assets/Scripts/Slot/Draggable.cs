@@ -1,9 +1,7 @@
-using System;
 using Enums;
 using Slot;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
@@ -11,7 +9,7 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     public Canvas canvas;
     private Transform originalParent;
     private Vector3 startPosition;
-    [FormerlySerializedAs("Direction")] [SerializeField] public Direction direction;
+    [SerializeField] public Direction direction;
 
     private void Start()
     {

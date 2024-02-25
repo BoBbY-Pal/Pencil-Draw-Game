@@ -1,4 +1,6 @@
-﻿using Frolicode;
+﻿using Enums;
+using Frolicode;
+using ManagersAndControllers;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -22,6 +24,8 @@ public class UiManager : Singleton<UiManager>
     public void LevelPassed()
     {
         levelPassedUI.SetActive(true);
+        GameManager.Instance.currentLevelIndex++;
+        PlayerPrefs.SetInt(GameData.currentGameMode.ToString() + "CURRENTLEVEL", GameManager.Instance.currentLevelIndex++);
     }
     
     public void LevelFailed()

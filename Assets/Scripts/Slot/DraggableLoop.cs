@@ -1,8 +1,6 @@
-using System;
 using Enums;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.Serialization;
 
 public class DraggableLoop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
