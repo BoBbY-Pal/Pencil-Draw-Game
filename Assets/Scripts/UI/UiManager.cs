@@ -1,6 +1,6 @@
-﻿using System;
-using Frolicode;
+﻿using Frolicode;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public class UiManager : Singleton<UiManager>
@@ -25,5 +25,10 @@ public class UiManager : Singleton<UiManager>
     public void LevelFailed()
     {
         levelFailedUI.SetActive(true);
+    }
+
+    public void BackBtnPressed()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 }
