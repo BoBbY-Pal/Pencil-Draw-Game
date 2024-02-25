@@ -4,12 +4,13 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
 
-public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class DraggableLoop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
+    public GameObject loopingPrefab;
     public Canvas canvas;
     private Transform originalParent;
     private Vector3 startPosition;
-    [FormerlySerializedAs("Direction")] [SerializeField] public Direction direction;
+    [SerializeField] public Direction direction;
 
     private void Start()
     {
@@ -42,29 +43,16 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
         if (hit.collider != null) 
         {
-            //if the object below draggable object has the specific component that marks it as a slot.
-            DirectionSlot slot = hit.collider.gameObject.GetComponent<DirectionSlot>();
-            if(slot != null) 
-            { 
-                // Handle the case where a direction slot is hit
-                
-                // If the component exists, then proceed to extract the direction info from the dropped object and enqueue it.
-                // directions.Enqueue(draggableComponent .GetComponent<Draggable>().Direction);
-                slot.direction = direction;
-                slot.draggable = this;
-                // re-parent the dropped object to the slot for visual feedback.
-                transform.SetParent( slot.transform);
+            Debug.Log("Got hit something.");
+            if(hit.collider.gameObject.CompareTag("DroppableArea"))
+            {
+                Debug.Log("Droppable area found");
+                Instantiate(loopingPrefab, hit.collider.gameObject.transform);
             }
         }
-        else
-        {
-            // Play destroy particle then change it's position to initial position..
-            // transform.position = startPosition;
-            // transform.SetParent(originalParent);
-            
-            Destroy(gameObject,1);
-        }
+        
         Instantiate(gameObject, startPosition, transform.localRotation, originalParent);
+        Destroy(gameObject);
     }
     
 }
