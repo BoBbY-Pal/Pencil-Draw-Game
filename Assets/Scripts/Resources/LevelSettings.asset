@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0345da20761c4726b06fe8dfb3446f28, type: 3}
+  m_Name: LevelSettings
+  m_EditorClassIdentifier: 
+  Levels:
+  - gridWidth: 4
+    gridHeight: 4
+    nodeSize: 5
+    nodeSpacing: 1.5
+    dotPrefab: {fileID: 6697996988861725066, guid: ac7e39d3b98c92843bea71040e560b16, type: 3}
+    firstNodeIndex: {x: 0, y: 2}
+    patternPath: 02000000040000000100000004000000020000000400000002000000030000000300000003000000
+  - gridWidth: 0
+    gridHeight: 0
+    nodeSize: 0
+    nodeSpacing: 0
+    dotPrefab: {fileID: 0}
+    firstNodeIndex: {x: 0, y: 0}
+    patternPath: 0100000004000000020000000200000003000000
+  - gridWidth: 0
+    gridHeight: 0
+    nodeSize: 0
+    nodeSpacing: 0
+    dotPrefab: {fileID: 0}
+    firstNodeIndex: {x: 0, y: 0}
+    patternPath: 
+  - gridWidth: 0
+    gridHeight: 0
+    nodeSize: 0
+    nodeSpacing: 0
+    dotPrefab: {fileID: 0}
+    firstNodeIndex: {x: 0, y: 0}
+    patternPath: 
+  - gridWidth: 0
+    gridHeight: 0
+    nodeSize: 0
+    nodeSpacing: 0
+    dotPrefab: {fileID: 0}
+    firstNodeIndex: {x: 0, y: 0}
+    patternPath: 
