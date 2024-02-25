@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Enums;
 using Frolicode;
 using UnityEngine;
@@ -15,7 +16,7 @@ namespace ManagersAndControllers
         private LevelSettings levelSettings;
         
         [SerializeField] public List<DirectionSlot> directionSlots = new List<DirectionSlot>();
-        [SerializeField] public Queue<Direction> directions = new Queue<Direction>();
+        [SerializeField] public List<Direction> playerDirectionsInput = new List<Direction>();
         public PencilController pencilController;
         public void Awake()
         {
@@ -23,14 +24,40 @@ namespace ManagersAndControllers
             currentLevel = levelSettings.Levels[currentLevelIndex-1];
         }
 
-        public void CheckPattern()
+        public void DrawPattern()
         {
             Debug.Log("Go button pressed");
-            foreach (var slot in directionSlots)
-            {
-                directions.Enqueue(slot.direction);
-            }
-            pencilController.MovePencil(directions);
+           
+            playerDirectionsInput.AddRange(directionSlots.Where(slot => slot.direction != Direction.NONE).Select(slot => slot.direction ));
+            
+            pencilController.MovePencil(playerDirectionsInput);
         }
+
+        public void CheckPatternMatch()
+        {
+            for (int i = 0; i < playerDirectionsInput.Count; i++)
+            {
+                // Compare elements at the current index
+                if (playerDirectionsInput[i] != currentLevel.patternPath[i])
+                {
+                    // Found a mismatch, stop execution
+                    Debug.Log($"Mismatch found at index {i}. Pattern does not match.");
+                    return; // Exit the method
+                }
+            }
+
+            // If we get here, all compared elements match. Now check if there's more elements left in any list.
+            if (playerDirectionsInput.Count == currentLevel.patternPath.Count)
+            {
+                Debug.Log("Patterns match exactly.");
+                UiManager.Instance.LevelPassed();
+            }
+            else
+            {
+                Debug.Log("Partial match: Player's pattern matches the beginning of the level's pattern.");
+                UiManager.Instance.LevelFailed();
+            }
+        }
+
     }
 }

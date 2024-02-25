@@ -25,22 +25,21 @@ public class PencilController : MonoBehaviour
         lineNodeSpacing = linesDrawer.lineNodeSpacing;
     }
     
-    public void MovePencil(Queue<Direction> directions) 
+    public void MovePencil(List<Direction> directions) 
     {
         StartCoroutine(FollowDirections(directions));
     }
 
-    IEnumerator FollowDirections(Queue<Direction> directions)
+    IEnumerator FollowDirections(List<Direction> directions)
     {
         currentLine = linesDrawer.PrepareLineDraw(pencil.transform.position);
         
         Vector2 currentPencilPos = pencil.transform.position; // Assuming 'pencil' is your pencil GameObject
         Vector2 currentLinePos = currentPencilPos;
         currentLine.AddPoint(currentLinePos);
-        
-        while (directions.Count > 0) 
+
+        foreach (var dir in directions)
         {
-            Direction dir = directions.Dequeue();
             switch (dir)
             {
                 case Direction.LEFT:
@@ -67,7 +66,9 @@ public class PencilController : MonoBehaviour
             // Wait for the pencil to reach the next node before continuing
             yield return new WaitForSeconds(1); // Adjust this time as needed
         }
+        
         // After completing the movement, check if the pattern is correct
+        GameManager.Instance.CheckPatternMatch();
     }
 
     IEnumerator MovePencilToPosition(Vector2 pencilTargetPosition, Vector2 lineTargetPosition, float duration)

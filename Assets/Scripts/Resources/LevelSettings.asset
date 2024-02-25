@@ -19,7 +19,7 @@ MonoBehaviour:
     nodeSpacing: 1.5
     dotPrefab: {fileID: 6697996988861725066, guid: ac7e39d3b98c92843bea71040e560b16, type: 3}
     firstNodeIndex: {x: 0, y: 2}
-    patternPath: 02000000040000000100000004000000020000000400000002000000030000000300000003000000
+    patternPath: 020000000400000001000000040000000200000004000000
   - gridWidth: 0
     gridHeight: 0
     nodeSize: 0

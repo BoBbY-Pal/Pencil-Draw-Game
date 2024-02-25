@@ -1,20 +1,24 @@
+using System;
 using Enums;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
 
-public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerUpHandler
+public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     public Canvas canvas;
     private Transform originalParent;
     private Vector3 startPosition;
     [FormerlySerializedAs("Direction")] [SerializeField] public Direction direction;
-   
-    
-    public void OnBeginDrag(PointerEventData eventData) 
+
+    private void Start()
     {
         startPosition = transform.position;
         originalParent = transform.parent;
+    }
+
+    public void OnBeginDrag(PointerEventData eventData) 
+    {
         transform.SetParent(transform.root);
     }
 
@@ -27,7 +31,6 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
             out Vector3 globalMousePos);
 
         transform.position = globalMousePos;
-        // transform.position = Input.mousePosition;
     }
 
     public void OnEndDrag(PointerEventData eventData) 
@@ -39,14 +42,11 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
         if (hit.collider != null) 
         {
-            Debug.Log("Hit: " + hit.collider.gameObject.name); // Log the name of the GameObject that was hit
-            
             //if the object below draggable object has the specific component that marks it as a slot.
             DirectionSlot slot = hit.collider.gameObject.GetComponent<DirectionSlot>();
             if(slot != null) 
             { 
                 // Handle the case where a direction slot is hit
-                Debug.Log("Direction slot hit: " + hit.collider.gameObject.name);
                 
                 // If the component exists, then proceed to extract the direction info from the dropped object and enqueue it.
                 // directions.Enqueue(draggableComponent .GetComponent<Draggable>().Direction);
@@ -55,8 +55,6 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
                 // re-parent the dropped object to the slot for visual feedback.
                 transform.SetParent( slot.transform);
             }
-            
-            // Instantiate(gameObject, startPosition, transform.localRotation, originalParent);
         }
         else
         {
@@ -64,17 +62,9 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
             // transform.position = startPosition;
             // transform.SetParent(originalParent);
             
-            // Destroy(gameObject,2);
+            Destroy(gameObject,2);
         }
+        Instantiate(gameObject, startPosition, transform.localRotation, originalParent);
     }
-
-    public void OnPointerUp(PointerEventData eventData)
-    {
-        Debug.Log("On pointer UP found a object: " + eventData.pointerCurrentRaycast.gameObject.name);
-        if (eventData.pointerCurrentRaycast.gameObject != null &&
-            eventData.pointerCurrentRaycast.gameObject.GetComponent<DirectionSlot>())
-        {
-            // The pointer was released over a DirectionSlot, handle the drop here
-        }
-    }
+    
 }
