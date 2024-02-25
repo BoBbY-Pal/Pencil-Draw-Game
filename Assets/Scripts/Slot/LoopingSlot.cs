@@ -16,7 +16,8 @@ namespace Slot
         public int loopCount = 2;
         public Button loopCountBtn;
         public TextMeshProUGUI loopCountTxt;
-
+        public Image directionSlot;
+        
         private void Awake()
         {
             loopCountBtn.onClick.AddListener(IncreaseLoopCount);

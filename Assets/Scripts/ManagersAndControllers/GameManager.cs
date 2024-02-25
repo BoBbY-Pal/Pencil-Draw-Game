@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Enums;
 using Frolicode;
+using Slot;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -11,13 +12,17 @@ namespace ManagersAndControllers
 {
     public class GameManager : Singleton<GameManager>
     {
-        private int currentLevelIndex = 1;
+        private int currentLevelIndex = 2;
         [NonSerialized] public Level currentLevel;
         private LevelSettings levelSettings;
         
         [SerializeField] public List<DirectionSlot> directionSlots = new List<DirectionSlot>();
+        [SerializeField] public List<LoopingSlot> loopingSlots = new List<LoopingSlot>();
         [SerializeField] public List<Direction> playerDirectionsInput = new List<Direction>();
         public PencilController pencilController;
+
+        [SerializeField] private GameObject droppableArea; 
+            
         public void Awake()
         {
             levelSettings = (LevelSettings) Resources.Load("LevelSettings");
@@ -33,6 +38,24 @@ namespace ManagersAndControllers
             pencilController.MovePencil(playerDirectionsInput);
         }
 
+        public void DrawLoopingPattern()
+        {
+            for (int i = 0; i < droppableArea.transform.childCount; i++)
+            {
+                loopingSlots.Add(droppableArea.transform.GetChild(i).GetComponent<LoopingSlot>());
+            }
+            
+            foreach (var loopingSlot in loopingSlots)
+            {
+                for (int i = 0; i < loopingSlot.loopCount; i++)
+                {
+                    playerDirectionsInput.Add(loopingSlot.direction);
+                }
+            }
+            
+            pencilController.MovePencil(playerDirectionsInput);
+        }
+        
         public void CheckPatternMatch()
         {
             for (int i = 0; i < playerDirectionsInput.Count; i++)

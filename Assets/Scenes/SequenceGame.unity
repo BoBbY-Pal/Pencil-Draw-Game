@@ -382,8 +382,10 @@ MonoBehaviour:
   - {fileID: 1264819810}
   - {fileID: 2072483140}
   - {fileID: 1700492078}
+  loopingSlots: []
   playerDirectionsInput: 
   pencilController: {fileID: 1509539627}
+  droppableArea: {fileID: 1074675211}
 --- !u!1 &448975085
 GameObject:
   m_ObjectHideFlags: 0
@@ -396,7 +398,6 @@ GameObject:
   - component: {fileID: 448975090}
   - component: {fileID: 448975089}
   - component: {fileID: 448975088}
-  - component: {fileID: 448975087}
   m_Layer: 5
   m_Name: Button (Legacy) (2)
   m_TagString: Untagged
@@ -424,20 +425,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -41}
   m_SizeDelta: {x: 160, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &448975087
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 448975085}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4cdeb7794eaa584690e7c32173ac452, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  toggleObject: {fileID: 1442551521}
-  toggleObjects: []
 --- !u!114 &448975088
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -482,9 +469,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 448975087}
-        m_TargetAssemblyTypeName: UIToggleButton, Assembly-CSharp
-        m_MethodName: ToggleObject
+      - m_Target: {fileID: 1575814966}
+        m_TargetAssemblyTypeName: UiManager, Assembly-CSharp
+        m_MethodName: TryAgain
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2238,8 +2225,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1062a11b303545ed8b33123ab6bcc089, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelPassedUI: {fileID: 0}
-  levelFailedUI: {fileID: 0}
+  backButton: {fileID: 550813956}
+  levelPassedUI: {fileID: 686534632}
+  levelFailedUI: {fileID: 1442551521}
 --- !u!1 &1624260801
 GameObject:
   m_ObjectHideFlags: 0
@@ -2406,7 +2394,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1634842568}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1575814966}
+        m_TargetAssemblyTypeName: UiManager, Assembly-CSharp
+        m_MethodName: TryAgain
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1634842568
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2730,7 +2730,7 @@ GameObject:
   - component: {fileID: 1756657839}
   - component: {fileID: 1756657838}
   m_Layer: 5
-  m_Name: Button (Legacy) (1)
+  m_Name: NextLevel-Button (Legacy) (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2800,7 +2800,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1756657839}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1575814964}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1756657839
 MonoBehaviour:
   m_ObjectHideFlags: 0

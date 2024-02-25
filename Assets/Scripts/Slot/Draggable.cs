@@ -1,8 +1,10 @@
 using System;
 using Enums;
+using Slot;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
@@ -44,16 +46,33 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         {
             //if the object below draggable object has the specific component that marks it as a slot.
             DirectionSlot slot = hit.collider.gameObject.GetComponent<DirectionSlot>();
-            if(slot != null) 
+            LoopingSlot loopingSlot = hit.collider.gameObject.GetComponent<LoopingSlot>();
+            if(loopingSlot != null)
+            {
+                
+                loopingSlot.direction = this.direction;
+                loopingSlot.draggable = this;
+                
+                // re-parent the dropped object to the slot for visual feedback.
+                transform.SetParent( loopingSlot.directionSlot.transform);
+                loopingSlot.directionSlot.sprite = gameObject.GetComponent<Image>().sprite;
+                loopingSlot.directionSlot.enabled = true;
+                Instantiate(gameObject, startPosition, transform.localRotation, originalParent);
+                Destroy(gameObject);
+            }
+            else if(slot != null) 
             { 
                 // Handle the case where a direction slot is hit
                 
                 // If the component exists, then proceed to extract the direction info from the dropped object and enqueue it.
                 // directions.Enqueue(draggableComponent .GetComponent<Draggable>().Direction);
-                slot.direction = direction;
+                slot.direction = this.direction;
                 slot.draggable = this;
                 // re-parent the dropped object to the slot for visual feedback.
                 transform.SetParent( slot.transform);
+                
+                // Reset the local position of the draggable object to align it with the slot
+                transform.localPosition = Vector3.zero; 
             }
         }
         else
