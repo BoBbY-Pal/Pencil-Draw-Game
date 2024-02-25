@@ -1491,11 +1491,9 @@ MonoBehaviour:
     m_Mode: 0
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
-  linePointsMinDistance: 0.2
   lineWidth: 0.1
-  lineDrawLimit: 1
   _canvas: {fileID: 1825433807}
-  nodeSpacing: 165
+  lineNodeSpacing: 165
 --- !u!1 &1509539625
 GameObject:
   m_ObjectHideFlags: 0

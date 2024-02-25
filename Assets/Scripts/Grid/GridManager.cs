@@ -21,7 +21,7 @@ public class GridManager : MonoBehaviour
         linesDrawer.CreatePattern(gridA[(int) currentLevel.firstNodeIndex.x, (int) currentLevel.firstNodeIndex.y].transform.position, GameManager.Instance.currentLevel.patternPath);
         
         GenerateGrid(GameManager.Instance.currentLevel, drawGrid, gridB);
-        GameManager.Instance.pencilController.InitPencil(gridB[(int) currentLevel.firstNodeIndex.x, (int) currentLevel.firstNodeIndex.y].transform.position, currentLevel.nodeSpacing);
+        GameManager.Instance.pencilController.PlacePencil(gridB[(int) currentLevel.firstNodeIndex.x, (int) currentLevel.firstNodeIndex.y].transform.position);
         // linesDrawer.CreatePattern(gridB[(int) currentLevel.firstNodeIndex.x, (int) currentLevel.firstNodeIndex.y].transform.position, GameManager.Instance.levelSettings.Levels[1].patternPath);
 
     }

@@ -11,20 +11,18 @@ public class LinesDrawer : MonoBehaviour
 
 	[Space ( 30f )]
 	public Gradient lineColor;
-	public float linePointsMinDistance;
+	
 	public float lineWidth;
-	private float _timeOfLineDraw;
-	public float lineDrawLimit;
+	
 	
 	private Line _currentLine;
 	private ObjectPooler<Line> _objectPooler;
-	Camera _cam;
+	
 	[SerializeField] private Canvas _canvas;
-	[SerializeField] private int nodeSpacing;
+	[SerializeField] public int lineNodeSpacing;
 
 	void Start ( ) 
 	{
-		_cam = Camera.main;
 		_objectPooler = new ObjectPooler<Line>(linePrefab, this.transform);
 	}
 
@@ -32,17 +30,6 @@ public class LinesDrawer : MonoBehaviour
 	{
 		// _objectPooler.ClearPool();
 	}
-
-	// void Update ( ) {
-	// 	if ( Input.GetMouseButtonDown ( 0 ) )
-	// 		BeginDraw ( );
-	// 	
-	// 	if ( _currentLine != null )
-	// 		Draw ( );
-	// 	
-	// 	if ( Input.GetMouseButtonUp ( 0 ) )
-	// 		EndDraw ( );
-	// }
 
 	public void CreatePattern(Vector2 startPoint, List<Direction> directions)
 	{
@@ -74,16 +61,16 @@ public class LinesDrawer : MonoBehaviour
 			switch (direction)
 			{
 				case Direction.LEFT:
-					currentPoint += Vector2.left *  nodeSpacing;
+					currentPoint += Vector2.left *  lineNodeSpacing;
 					break;
 				case Direction.RIGHT:
-					currentPoint += Vector2.right *  nodeSpacing;
+					currentPoint += Vector2.right *  lineNodeSpacing;
 					break;
 				case Direction.UP:
-					currentPoint += Vector2.up *   nodeSpacing;
+					currentPoint += Vector2.up *   lineNodeSpacing;
 					break;
 				case Direction.DOWN:
-					currentPoint += Vector2.down *  nodeSpacing;
+					currentPoint += Vector2.down *  lineNodeSpacing;
 					break;
 			}
 
@@ -91,29 +78,6 @@ public class LinesDrawer : MonoBehaviour
 		}
 	}
 	
-	public void DrawLineFromDirection(Line line, Direction direction)
-	{
-		Vector2 currentPoint = Vector2.zero;
-	
-			switch (direction)
-			{
-				case Direction.LEFT:
-					currentPoint += Vector2.left *  nodeSpacing;
-					break;
-				case Direction.RIGHT:
-					currentPoint += Vector2.right *  nodeSpacing;
-					break;
-				case Direction.UP:
-					currentPoint += Vector2.up *   nodeSpacing;
-					break;
-				case Direction.DOWN:
-					currentPoint += Vector2.down *  nodeSpacing;
-					break;
-			}
-
-			line.AddPoint(currentPoint); // Add the new point based on the direction
-	
-	}
 	// Begin Draw ----------------------------------------------
 	Line BeginDraw ( ) {
 		// currentLine = Instantiate ( linePrefab, this.transform ).GetComponent <Line> ( );
@@ -127,38 +91,5 @@ public class LinesDrawer : MonoBehaviour
 		//Set line properties
 		pooledLine.SetLineWidth ( lineWidth );
 		return pooledLine;
-	}
-	// Draw ----------------------------------------------------
-	void Draw ( ) {
-		Vector2 mousePosition = _cam.ScreenToWorldPoint ( Input.mousePosition );
-
-		// //Check if mousePos hits any collider with layer "CantDrawOver", if true cut the line by calling EndDraw( )
-		// RaycastHit2D hit = Physics2D.CircleCast ( mousePosition, lineWidth / 3f, Vector2.zero, 1f, cantDrawOverLayer );
-		_timeOfLineDraw += Time.deltaTime;
-		if ( _timeOfLineDraw >= lineDrawLimit )
-			EndDraw ( );
-		else
-			_currentLine.AddPoint ( mousePosition );
-	}
-	// End Draw ------------------------------------------------
-	void EndDraw ( ) {
-		if ( _currentLine != null ) 
-		{
-			if ( _currentLine.pointsCount < 2 ) 
-			{
-				//If line has one point
-				StartCoroutine(_currentLine.ResetLine(0));
-			} 
-			else
-			{
-				//Activate Physics on the line
-				// Set it to 'true' if you want line to fall down after drawing it.
-				_currentLine.UsePhysics ( false );
-				StartCoroutine(_currentLine.ResetLine(5));
-				_currentLine = null;
-			}
-
-			_timeOfLineDraw = 0;
-		}
 	}
 }
