@@ -5,44 +5,47 @@ using Enums;
 using Frolicode;
 using Slot;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 
 namespace ManagersAndControllers
 {
     public class GameManager : Singleton<GameManager>
     {
-        public int currentLevelIndex = 1;
+        [SerializeField] public int currentLevelIndex = 1;
         [NonSerialized] public Level currentLevel;
         private LevelSettings levelSettings;
         
         [SerializeField] public List<DirectionSlot> directionSlots = new List<DirectionSlot>();
         [SerializeField] public List<LoopingSlot> loopingSlots = new List<LoopingSlot>();
         [SerializeField] public List<Direction> playerDirectionsInput = new List<Direction>();
-        public PencilController pencilController;
 
-        [SerializeField] private GameObject droppableArea; 
-            
+        public PencilController pencilController;
+        [SerializeField] private GameObject droppableArea;
+        public GridManager gridManager;
+        
         public void Awake()
         {
-            levelSettings = (LevelSettings) Resources.Load("LevelSettings");
+            FetchLevel();
+        }
+
+        public void FetchLevel()
+        {
+            if (levelSettings == null)
+            {
+                levelSettings = (LevelSettings) Resources.Load("LevelSettings");
+            }
+            
             Debug.Log("gamemode: " + GameData.currentGameMode);
             if (GameData.currentGameMode == GameMode.LOOPING)
             {
-                if (PlayerPrefs.HasKey("LOOPINGCURRENTLEVEL"))
-                {
-                    currentLevelIndex = PlayerPrefs.GetInt("LOOPINGCURRENTLEVEL", currentLevelIndex);
-                }
                 currentLevel = levelSettings.loopingLevels[currentLevelIndex-1];
             }
             else if (GameData.currentGameMode == GameMode.SEQUENCE)
             {
-                if (PlayerPrefs.HasKey("SEQUENCECURRENTLEVEL"))
-                {
-                    currentLevelIndex = PlayerPrefs.GetInt("SEQUENCECURRENTLEVEL", currentLevelIndex);
-                }
                 currentLevel = levelSettings.sequenceLevels[currentLevelIndex-1];
             }
+            
+            UiManager.Instance.SetLevelNumber(currentLevelIndex);
         }
 
         public void DrawPattern()
@@ -99,5 +102,28 @@ namespace ManagersAndControllers
             }
         }
 
+        public void LoadLevel()
+        {
+            foreach (var loopingSlot in loopingSlots)
+            {
+                if (loopingSlot != null )
+                {
+                    Destroy(loopingSlot.gameObject);
+                }
+            }
+            foreach (var directionSlot in directionSlots)
+            {
+                if (directionSlot.draggable != null )
+                {
+                    Destroy(directionSlot.draggable.gameObject);
+                }
+            }
+            loopingSlots.Clear();
+            playerDirectionsInput.Clear();
+            gridManager.ResetGrid();
+            pencilController.linesDrawer.ResetLines();
+            FetchLevel();
+            gridManager.PrepareGrid();
+        }
     }
 }

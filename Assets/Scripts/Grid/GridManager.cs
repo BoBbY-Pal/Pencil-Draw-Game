@@ -1,4 +1,5 @@
-﻿using ManagersAndControllers;
+﻿using System;
+using ManagersAndControllers;
 using UnityEngine;
 
 
@@ -12,18 +13,22 @@ public class GridManager : MonoBehaviour
     public GameObject[,] gridA;
     public GameObject[,] gridB;
     private Level currentLevel;
+
     private void Start()
+    {
+        PrepareGrid();
+    }
+
+    public void PrepareGrid()
     {
         currentLevel = GameManager.Instance.currentLevel;
         gridA = new GameObject[currentLevel.gridWidth, currentLevel.gridHeight];
         gridB = new GameObject[currentLevel.gridWidth, currentLevel.gridHeight];
-        GenerateGrid(GameManager.Instance.currentLevel, showCaseGrid, gridA);
-        linesDrawer.CreatePattern(gridA[(int) currentLevel.firstNodeIndex.x, (int) currentLevel.firstNodeIndex.y].transform.position, GameManager.Instance.currentLevel.patternPath);
+        GenerateGrid(currentLevel, showCaseGrid, gridA);
+        linesDrawer.CreatePattern(gridA[(int) currentLevel.firstNodeIndex.x, (int) currentLevel.firstNodeIndex.y].transform.position, currentLevel.patternPath);
         
-        GenerateGrid(GameManager.Instance.currentLevel, drawGrid, gridB);
+        GenerateGrid(currentLevel, drawGrid, gridB);
         GameManager.Instance.pencilController.PlacePencil(gridB[(int) currentLevel.firstNodeIndex.x, (int) currentLevel.firstNodeIndex.y].transform.position);
-        // linesDrawer.CreatePattern(gridB[(int) currentLevel.firstNodeIndex.x, (int) currentLevel.firstNodeIndex.y].transform.position, GameManager.Instance.levelSettings.Levels[1].patternPath);
-
     }
 
     public void GenerateGrid(Level level, GameObject gridParent, GameObject[,] grid)
@@ -51,6 +56,16 @@ public class GridManager : MonoBehaviour
         }
     }
 
-
+    public void ResetGrid()
+    {
+        foreach (var node in gridA)
+        {
+            Destroy(node);
+        }
+        foreach (var node in gridB)
+        {
+            Destroy(node);
+        }
+    }
 
 }

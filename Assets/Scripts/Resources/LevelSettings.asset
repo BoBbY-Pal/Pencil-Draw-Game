@@ -23,25 +23,25 @@ MonoBehaviour:
     gridHeight: 4
     nodeSpacing: 1.5
     dotPrefab: {fileID: 6697996988861725066, guid: ac7e39d3b98c92843bea71040e560b16, type: 3}
-    firstNodeIndex: {x: 4, y: 1}
+    firstNodeIndex: {x: 3, y: 1}
     patternPath: 0300000003000000030000000100000001000000
   - gridWidth: 4
     gridHeight: 4
     nodeSpacing: 1.5
     dotPrefab: {fileID: 6697996988861725066, guid: ac7e39d3b98c92843bea71040e560b16, type: 3}
-    firstNodeIndex: {x: 4, y: 1}
+    firstNodeIndex: {x: 3, y: 1}
     patternPath: 0300000003000000030000000100000001000000
   - gridWidth: 4
     gridHeight: 4
     nodeSpacing: 1.5
     dotPrefab: {fileID: 6697996988861725066, guid: ac7e39d3b98c92843bea71040e560b16, type: 3}
-    firstNodeIndex: {x: 4, y: 1}
-    patternPath: 0300000003000000030000000100000001000000
+    firstNodeIndex: {x: 3, y: 1}
+    patternPath: 03000000030000000100000001000000
   - gridWidth: 4
     gridHeight: 4
     nodeSpacing: 1.5
     dotPrefab: {fileID: 6697996988861725066, guid: ac7e39d3b98c92843bea71040e560b16, type: 3}
-    firstNodeIndex: {x: 4, y: 1}
+    firstNodeIndex: {x: 3, y: 0}
     patternPath: 0300000003000000030000000100000001000000
   sequenceLevels:
   - gridWidth: 4
@@ -61,22 +61,22 @@ MonoBehaviour:
     nodeSpacing: 1.5
     dotPrefab: {fileID: 6697996988861725066, guid: ac7e39d3b98c92843bea71040e560b16, type: 3}
     firstNodeIndex: {x: 0, y: 3}
-    patternPath: 0200000002000000040000000400000002000000
+    patternPath: 0200000004000000040000000400000002000000
   - gridWidth: 4
     gridHeight: 4
     nodeSpacing: 1.5
     dotPrefab: {fileID: 6697996988861725066, guid: ac7e39d3b98c92843bea71040e560b16, type: 3}
-    firstNodeIndex: {x: 0, y: 3}
-    patternPath: 0200000002000000040000000400000002000000
+    firstNodeIndex: {x: 3, y: 3}
+    patternPath: 0200000002000000030000000300000002000000
   - gridWidth: 4
     gridHeight: 4
     nodeSpacing: 1.5
     dotPrefab: {fileID: 6697996988861725066, guid: ac7e39d3b98c92843bea71040e560b16, type: 3}
-    firstNodeIndex: {x: 0, y: 3}
-    patternPath: 0200000002000000040000000400000002000000
+    firstNodeIndex: {x: 3, y: 3}
+    patternPath: 0200000002000000030000000300000001000000
   - gridWidth: 4
     gridHeight: 4
     nodeSpacing: 1.5
     dotPrefab: {fileID: 6697996988861725066, guid: ac7e39d3b98c92843bea71040e560b16, type: 3}
-    firstNodeIndex: {x: 0, y: 3}
-    patternPath: 0200000002000000040000000400000002000000
+    firstNodeIndex: {x: 0, y: 0}
+    patternPath: 0100000004000000040000000400000001000000

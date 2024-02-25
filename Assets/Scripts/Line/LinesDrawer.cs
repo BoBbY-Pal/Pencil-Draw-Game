@@ -6,8 +6,6 @@ public class LinesDrawer : MonoBehaviour
 {
 
 	public GameObject linePrefab;
-	
-	// int cantDrawOverLayerIndex;
 
 	[Space ( 30f )]
 	public Gradient lineColor;
@@ -21,6 +19,8 @@ public class LinesDrawer : MonoBehaviour
 	[SerializeField] private Canvas _canvas;
 	[SerializeField] public int lineNodeSpacing;
 
+	private List<Line> _lines = new List<Line>();
+	
 	void Start ( ) 
 	{
 		_objectPooler = new ObjectPooler<Line>(linePrefab, this.transform);
@@ -43,6 +43,7 @@ public class LinesDrawer : MonoBehaviour
 		line.transform.SetParent(_canvas.transform);
 		line.transform.position = startPoint;
 		line.transform.localScale = Vector3.one;
+		_lines.Add(line);
 		return line;
 	}
 
@@ -91,5 +92,13 @@ public class LinesDrawer : MonoBehaviour
 		//Set line properties
 		pooledLine.SetLineWidth ( lineWidth );
 		return pooledLine;
+	}
+
+	public void ResetLines()
+	{
+		foreach (var line in _lines)
+		{
+			line.ResetLine();
+		}
 	}
 }
