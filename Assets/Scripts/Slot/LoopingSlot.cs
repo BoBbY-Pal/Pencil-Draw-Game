@@ -13,7 +13,7 @@ namespace Slot
         [SerializeField] public Direction direction;
         public Draggable draggable;
 
-        public int loopCount = 2;
+        public int loopCount = 1;
         public Button loopCountBtn;
         public TextMeshProUGUI loopCountTxt;
         public Image directionSlot;

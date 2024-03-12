@@ -5,6 +5,7 @@ using Enums;
 using Frolicode;
 using Slot;
 using UnityEngine;
+using Utils;
 
 
 namespace ManagersAndControllers
@@ -110,6 +111,7 @@ namespace ManagersAndControllers
                 {
                     if (loopingSlot != null)
                     {
+                        loopingSlot.direction = Direction.NONE;
                         Destroy(loopingSlot.gameObject);
                     }
                 }
@@ -121,6 +123,7 @@ namespace ManagersAndControllers
                 {
                     if (directionSlot.draggable != null )
                     {
+                        directionSlot.direction = Direction.NONE;
                         Destroy(directionSlot.draggable.gameObject);
                     }
                 }
